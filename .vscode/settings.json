@@ -1,0 +1,5 @@
+﻿{
+  "terminal.integrated.env.windows": {
+    "UV_ENV_FILE": ".env"
+  }
+}

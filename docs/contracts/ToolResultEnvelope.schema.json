@@ -1,0 +1,53 @@
+{
+  "properties": {
+    "status": {
+      "enum": [
+        "ok",
+        "error"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "provider": {
+      "title": "Provider",
+      "type": "string"
+    },
+    "retrieved_at_utc": {
+      "description": "UTC timestamp",
+      "format": "date-time",
+      "title": "Retrieved At Utc",
+      "type": "string"
+    },
+    "cache_hit": {
+      "default": false,
+      "title": "Cache Hit",
+      "type": "boolean"
+    },
+    "warnings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Warnings",
+      "type": "array"
+    },
+    "error": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Error"
+    }
+  },
+  "required": [
+    "status",
+    "provider",
+    "retrieved_at_utc"
+  ],
+  "title": "ToolResultEnvelope",
+  "type": "object"
+}

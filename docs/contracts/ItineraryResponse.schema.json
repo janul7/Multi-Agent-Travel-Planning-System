@@ -1,0 +1,475 @@
+{
+  "$defs": {
+    "CurrencyResult": {
+      "properties": {
+        "from_currency": {
+          "maxLength": 3,
+          "minLength": 3,
+          "title": "From Currency",
+          "type": "string"
+        },
+        "to_currency": {
+          "maxLength": 3,
+          "minLength": 3,
+          "title": "To Currency",
+          "type": "string"
+        },
+        "amount": {
+          "exclusiveMinimum": 0,
+          "title": "Amount",
+          "type": "number"
+        },
+        "converted_amount": {
+          "exclusiveMinimum": 0,
+          "title": "Converted Amount",
+          "type": "number"
+        },
+        "fx_rate": {
+          "exclusiveMinimum": 0,
+          "title": "Fx Rate",
+          "type": "number"
+        }
+      },
+      "required": [
+        "from_currency",
+        "to_currency",
+        "amount",
+        "converted_amount",
+        "fx_rate"
+      ],
+      "title": "CurrencyResult",
+      "type": "object"
+    },
+    "DayPlan": {
+      "properties": {
+        "date": {
+          "format": "date",
+          "title": "Date",
+          "type": "string"
+        },
+        "weather": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ToolResultEnvelope"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "weather_data": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/WeatherResult"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "schedule": {
+          "items": {
+            "$ref": "#/$defs/ScheduleItem"
+          },
+          "title": "Schedule",
+          "type": "array"
+        },
+        "events": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ToolResultEnvelope"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "events_data": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EventsResult"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "date"
+      ],
+      "title": "DayPlan",
+      "type": "object"
+    },
+    "EventsResult": {
+      "properties": {
+        "city": {
+          "title": "City",
+          "type": "string"
+        },
+        "events": {
+          "description": "Keep simple first; tighten later",
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Events",
+          "type": "array"
+        }
+      },
+      "required": [
+        "city"
+      ],
+      "title": "EventsResult",
+      "type": "object"
+    },
+    "Money": {
+      "properties": {
+        "amount": {
+          "exclusiveMinimum": 0,
+          "title": "Amount",
+          "type": "number"
+        },
+        "currency": {
+          "description": "ISO 4217 code, e.g. USD, SGD",
+          "maxLength": 3,
+          "minLength": 3,
+          "title": "Currency",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "title": "Money",
+      "type": "object"
+    },
+    "RAGChunk": {
+      "properties": {
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "source_url": {
+          "title": "Source Url",
+          "type": "string"
+        },
+        "title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Title"
+        },
+        "score": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Score",
+          "type": "number"
+        }
+      },
+      "required": [
+        "text",
+        "source_url",
+        "score"
+      ],
+      "title": "RAGChunk",
+      "type": "object"
+    },
+    "ScheduleItem": {
+      "properties": {
+        "time": {
+          "description": "Local time like 09:30",
+          "title": "Time",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "why": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Why"
+        }
+      },
+      "required": [
+        "time",
+        "title"
+      ],
+      "title": "ScheduleItem",
+      "type": "object"
+    },
+    "ToolResultEnvelope": {
+      "properties": {
+        "status": {
+          "enum": [
+            "ok",
+            "error"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "provider": {
+          "title": "Provider",
+          "type": "string"
+        },
+        "retrieved_at_utc": {
+          "description": "UTC timestamp",
+          "format": "date-time",
+          "title": "Retrieved At Utc",
+          "type": "string"
+        },
+        "cache_hit": {
+          "default": false,
+          "title": "Cache Hit",
+          "type": "boolean"
+        },
+        "warnings": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Warnings",
+          "type": "array"
+        },
+        "error": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error"
+        }
+      },
+      "required": [
+        "status",
+        "provider",
+        "retrieved_at_utc"
+      ],
+      "title": "ToolResultEnvelope",
+      "type": "object"
+    },
+    "TripRequest": {
+      "properties": {
+        "destination": {
+          "description": "City or country name, e.g. Singapore",
+          "minLength": 2,
+          "title": "Destination",
+          "type": "string"
+        },
+        "start_date": {
+          "format": "date",
+          "title": "Start Date",
+          "type": "string"
+        },
+        "end_date": {
+          "format": "date",
+          "title": "End Date",
+          "type": "string"
+        },
+        "pace": {
+          "default": "medium",
+          "enum": [
+            "slow",
+            "medium",
+            "fast"
+          ],
+          "title": "Pace",
+          "type": "string"
+        },
+        "interests": {
+          "description": "e.g. food, museums, nature",
+          "items": {
+            "type": "string"
+          },
+          "title": "Interests",
+          "type": "array"
+        },
+        "constraints": {
+          "description": "e.g. avoid long walking blocks",
+          "items": {
+            "type": "string"
+          },
+          "title": "Constraints",
+          "type": "array"
+        },
+        "budget": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Money"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "destination",
+        "start_date",
+        "end_date"
+      ],
+      "title": "TripRequest",
+      "type": "object"
+    },
+    "TripSummary": {
+      "properties": {
+        "destination": {
+          "title": "Destination",
+          "type": "string"
+        },
+        "date_range_local": {
+          "title": "Date Range Local",
+          "type": "string"
+        },
+        "pace": {
+          "title": "Pace",
+          "type": "string"
+        },
+        "constraints": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Constraints",
+          "type": "array"
+        },
+        "budget_original": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Money"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "budget_converted": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ToolResultEnvelope"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "budget_converted_data": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CurrencyResult"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "destination",
+        "date_range_local",
+        "pace"
+      ],
+      "title": "TripSummary",
+      "type": "object"
+    },
+    "WeatherResult": {
+      "properties": {
+        "summary": {
+          "title": "Summary",
+          "type": "string"
+        },
+        "high_c": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "High C"
+        },
+        "low_c": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Low C"
+        }
+      },
+      "required": [
+        "summary"
+      ],
+      "title": "WeatherResult",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "trip_request": {
+      "$ref": "#/$defs/TripRequest"
+    },
+    "trip_summary": {
+      "$ref": "#/$defs/TripSummary"
+    },
+    "days": {
+      "items": {
+        "$ref": "#/$defs/DayPlan"
+      },
+      "title": "Days",
+      "type": "array"
+    },
+    "practical_notes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Practical Notes",
+      "type": "array"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/RAGChunk"
+      },
+      "title": "Sources",
+      "type": "array"
+    }
+  },
+  "required": [
+    "trip_request",
+    "trip_summary",
+    "days"
+  ],
+  "title": "ItineraryResponse",
+  "type": "object"
+}

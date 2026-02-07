@@ -1,0 +1,88 @@
+{
+  "$defs": {
+    "Money": {
+      "properties": {
+        "amount": {
+          "exclusiveMinimum": 0,
+          "title": "Amount",
+          "type": "number"
+        },
+        "currency": {
+          "description": "ISO 4217 code, e.g. USD, SGD",
+          "maxLength": 3,
+          "minLength": 3,
+          "title": "Currency",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "title": "Money",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "destination": {
+      "description": "City or country name, e.g. Singapore",
+      "minLength": 2,
+      "title": "Destination",
+      "type": "string"
+    },
+    "start_date": {
+      "format": "date",
+      "title": "Start Date",
+      "type": "string"
+    },
+    "end_date": {
+      "format": "date",
+      "title": "End Date",
+      "type": "string"
+    },
+    "pace": {
+      "default": "medium",
+      "enum": [
+        "slow",
+        "medium",
+        "fast"
+      ],
+      "title": "Pace",
+      "type": "string"
+    },
+    "interests": {
+      "description": "e.g. food, museums, nature",
+      "items": {
+        "type": "string"
+      },
+      "title": "Interests",
+      "type": "array"
+    },
+    "constraints": {
+      "description": "e.g. avoid long walking blocks",
+      "items": {
+        "type": "string"
+      },
+      "title": "Constraints",
+      "type": "array"
+    },
+    "budget": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Money"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "destination",
+    "start_date",
+    "end_date"
+  ],
+  "title": "TripRequest",
+  "type": "object"
+}

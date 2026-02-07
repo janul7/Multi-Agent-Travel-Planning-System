@@ -1,0 +1,40 @@
+{
+  "properties": {
+    "from_currency": {
+      "maxLength": 3,
+      "minLength": 3,
+      "title": "From Currency",
+      "type": "string"
+    },
+    "to_currency": {
+      "maxLength": 3,
+      "minLength": 3,
+      "title": "To Currency",
+      "type": "string"
+    },
+    "amount": {
+      "exclusiveMinimum": 0,
+      "title": "Amount",
+      "type": "number"
+    },
+    "converted_amount": {
+      "exclusiveMinimum": 0,
+      "title": "Converted Amount",
+      "type": "number"
+    },
+    "fx_rate": {
+      "exclusiveMinimum": 0,
+      "title": "Fx Rate",
+      "type": "number"
+    }
+  },
+  "required": [
+    "from_currency",
+    "to_currency",
+    "amount",
+    "converted_amount",
+    "fx_rate"
+  ],
+  "title": "CurrencyResult",
+  "type": "object"
+}

@@ -1,0 +1,22 @@
+{
+  "properties": {
+    "city": {
+      "title": "City",
+      "type": "string"
+    },
+    "events": {
+      "description": "Keep simple first; tighten later",
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Events",
+      "type": "array"
+    }
+  },
+  "required": [
+    "city"
+  ],
+  "title": "EventsResult",
+  "type": "object"
+}

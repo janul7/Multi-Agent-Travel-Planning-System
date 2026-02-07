@@ -1,0 +1,37 @@
+{
+  "properties": {
+    "summary": {
+      "title": "Summary",
+      "type": "string"
+    },
+    "high_c": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "High C"
+    },
+    "low_c": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Low C"
+    }
+  },
+  "required": [
+    "summary"
+  ],
+  "title": "WeatherResult",
+  "type": "object"
+}

@@ -1,0 +1,22 @@
+{
+  "properties": {
+    "amount": {
+      "exclusiveMinimum": 0,
+      "title": "Amount",
+      "type": "number"
+    },
+    "currency": {
+      "description": "ISO 4217 code, e.g. USD, SGD",
+      "maxLength": 3,
+      "minLength": 3,
+      "title": "Currency",
+      "type": "string"
+    }
+  },
+  "required": [
+    "amount",
+    "currency"
+  ],
+  "title": "Money",
+  "type": "object"
+}
